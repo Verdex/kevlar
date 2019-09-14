@@ -76,5 +76,6 @@ end--]]
 return { keyrelease = keyrelease
        ; keypress = keypress
        ; init = init
+       ; set_mode = set_mode
        }
 
