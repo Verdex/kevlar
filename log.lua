@@ -13,6 +13,11 @@ local function debug_logger()
         self.f:write( "[ERROR] : " .. d .. " : " .. message .. '\n' )
     end
 
+    function l:tag( tag, message )
+        local d = os.date()
+        self.f:write( "[" .. tag .. "] : " .. d .. " : " .. message .. '\n' )
+    end
+
     function l:special( file, message )
         local f = io.open('logs/'..file, 'a')
         local d = os.date()
