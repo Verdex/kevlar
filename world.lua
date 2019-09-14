@@ -14,18 +14,18 @@ local function init()
 
     function w:create_mob( mob )
         local id = mob_id()
+        mob.id = id
         self.mobs[id] = mob
         return id
     end
 
-    function w:set_mob( id )
-        
+    function w:mobs()
+        return self.mobs
     end
+
 
     return w
 end
-
-
 
 
 return { init = init 
