@@ -1,13 +1,15 @@
 
-local kb_listen = require 'keyboard_listener'
+local keyboard = require 'keyboard'
+local log = require 'log'
 
 
 
 -- this only gets called once at the beginning
 function love.load()
+    logger = log.debug_logger()
     x = 10
     y = 10
-    keyboard_listener = kb_listen.init() 
+    listener = keyboard.init() 
     local f = {}
     function f:keypress(key)
         if key == 'h' then
@@ -22,7 +24,7 @@ function love.load()
     end
     function f:keyrelease(key)
     end
-    kb_listen.set_mode( keyboard_listener, 'm', f )
+    keyboard.set_mode( listener, 'm', f )
 end
 
 -- this function is called continuously
@@ -47,11 +49,11 @@ function love.mousereleased(x, y, button, istouch)
 end
 
 function love.keypressed(key)
-    kb_listen.keypress( keyboard_listener, key )
+    keyboard.keypress( listener, key )
 end
 
 function love.keyreleased(key)
-    kb_listen.keyrelease( keyboard_listener, key )
+    keyboard.keyrelease( listener, key )
 end
 
 function love.focus(in_focus)
@@ -59,5 +61,5 @@ function love.focus(in_focus)
 end
 
 function love.quit()
-
+    logger:close()
 end
