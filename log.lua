@@ -1,26 +1,29 @@
 
 
 local function debug_logger() 
-    local l = { f = love.filesystem.newFile('logs/debug.log') }
-    l.f:open('a')
+    local l = { f = io.open('logs/debug.log', 'a') }
 
     function l:info( message )
-        self.f:write( "[INFO] : " .. message ) 
+        local d = os.date()
+        self.f:write( "[INFO] : " .. d .. " : " .. message .. '\n') 
     end
 
     function l:err( message )
-        self.f:write( "[ERROR] : " .. message )
+        local d = os.date()
+        self.f:write( "[ERROR] : " .. d .. " : " .. message .. '\n' )
     end
 
     function l:special( file, message )
-        local f = love.filesystem.newFile('logs/'..file)
-        f:open('a')
-        f:write( message )
+        local f = io.open('logs/'..file, 'a')
+        local d = os.date()
+        f:write( d .. " : " .. message .. "\n" )
         f:close()
     end
 
     function l:close()
-       self.f:close()
+        local d = os.date()
+        self.f:write( d .. " : CLOSE LOGGER\n" ) 
+        self.f:close()
     end
 
     return l
