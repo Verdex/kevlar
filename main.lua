@@ -20,22 +20,6 @@ function love.load()
     
     local movement_mode = keyboard_mod.init_movement_mode( event, hero_id )
 
---[[    x = 10
-    y = 10
-    local f = {}
-    function f:keypress(key)
-        if key == 'h' then
-            x = x - 1
-        elseif key == 'k' then
-            y = y - 1
-        elseif key == 'l' then
-            x = x + 1
-        elseif key == 'j' then
-            y = y + 1
-        end
-    end
-    function f:keyrelease(key)
-    end--]]
     keyboard:set_mode( 'm', movement_mode )
 end
 
