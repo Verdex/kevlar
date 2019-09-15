@@ -16,7 +16,7 @@ local function shift_key( key )
     end
 end
 
-local function init( log )
+local function init()
     local k = { left_shift = false
               ; right_shift = false
               ; mode = false
@@ -69,50 +69,6 @@ local function init( log )
     return k
 end
 
---[[local function set_mode( listener, mode_letter, forwardee )
-    listener.modes[#listener.modes + 1] = { mode = mode_letter
-                                          ; forwardee = forwardee 
-                                          }
-end
-
-
-local function keypress( listener, key )
-    if listener.left_shift or listener.right_shift then
-        key = shift_key( key )
-    end
-
-    if key == "escape" then
-        listener.mode = false
-    elseif key == "lshift" then 
-        listener.left_shift = true
-    elseif key == "rshift" then
-        listener.right_shift = true
-    elseif not listener.mode then
-        for _, v in ipairs( listener.modes ) do
-            if v.mode == key then
-                listener.mode = v.forwardee
-                break
-            end
-        end
-    else
-        listener.mode:keypress( key )
-    end
-end
-
-local function keyrelease( listener, key )
-    if listener.left_shift or listener.right_shift then
-        key = shift_key( key )
-    end
-
-    if key == "lshift" then 
-        listener.left_shift = false
-    elseif key == "rshift" then
-        listener.right_shift = false 
-    elseif listener.mode then
-        listener.mode:keyrelease( key )
-    end
-end
---]]
 
 --[[function handle_move( key, hero )
     if key == 'h' then
@@ -126,9 +82,5 @@ end
     end
 end--]]
 
-return { keyrelease = keyrelease
-       ; keypress = keypress
-       ; init = init
-       ; set_mode = set_mode
-       }
+return { init = init }
 
