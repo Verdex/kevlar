@@ -1,12 +1,15 @@
 
 local keyboard = require 'keyboard'
 local log = require 'log'
+local w = require 'world'
 
 
 
 -- this only gets called once at the beginning
 function love.load()
     logger = log.debug_logger()
+    world = w.init()
+    
     x = 10
     y = 10
     listener = keyboard.init() 
