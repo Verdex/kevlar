@@ -1,18 +1,27 @@
 
-local key = require 'keyboard'
-local log = require 'log'
-local wor = require 'world'
+local keyboard_mod = require 'keyboard'
+local log_mod = require 'log'
+local world_mod = require 'world'
+local event_mod = require 'event'
+local mover_mod = require 'mover'
 
 
 
 -- this only gets called once at the beginning
 function love.load()
-    logger = log.debug_logger()
-    world = wor.init()
+    logger = log_mod.debug_logger()
+    world = world_mod.init()
+    event = event_mod.init( logger )
+    keyboard = keyboard_mod.init() 
+
+    mover_mod.init( event, world, logger )
     
-    x = 10
+    hero_id = world:create_mob( { x = 10 ; y = 10 } )
+    
+    local movement_mode = keyboard_mod.init_movement_mode( event, hero_id )
+
+--[[    x = 10
     y = 10
-    keyboard = key.init() 
     local f = {}
     function f:keypress(key)
         if key == 'h' then
@@ -26,8 +35,8 @@ function love.load()
         end
     end
     function f:keyrelease(key)
-    end
-    keyboard:set_mode( 'm', f )
+    end--]]
+    keyboard:set_mode( 'm', movement_mode )
 end
 
 -- this function is called continuously
@@ -40,7 +49,8 @@ end
 -- this is the only function that the graphics functions
 -- will work in
 function love.draw()
-    love.graphics.print( "@", x, y )
+    local h = world:get_mob( hero_id )
+    love.graphics.print( "@", h.x, h.y )
 end
 
 function love.mousepressed(x, y, button, istouch)

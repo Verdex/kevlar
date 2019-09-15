@@ -69,18 +69,27 @@ local function init()
     return k
 end
 
+local function init_movement_mode( event, hero_id )
+    local m = {}
 
---[[function handle_move( key, hero )
-    if key == 'h' then
-        hero.move = west
-    elseif key == 'j' then
-        hero.move = south 
-    elseif key == 'k' then
-        hero.move = north 
-    elseif key == 'l' then
-        hero.move = east 
+    function m:keypress(key)
+        if key == 'h' then
+            event:trigger( "move", { who = hero_id; direction = "west" } )
+        elseif key == 'k' then
+            event:trigger( "move", { who = hero_id; direction = "north" } )
+        elseif key == 'l' then
+            event:trigger( "move", { who = hero_id; direction = "east" } )
+        elseif key == 'j' then
+            event:trigger( "move", { who = hero_id; direction = "south" } )
+        end
     end
-end--]]
+    function m:keyrelease(key)
+    end
 
-return { init = init }
+    return m
+end
+
+return { init = init 
+       ; init_movement_mode = init_movement_mode
+       }
 

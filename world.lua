@@ -19,7 +19,7 @@ local function init()
         return id
     end
 
-    function w:mobs()
+    function w:get_mobs()
         return self.mobs
     end
 
@@ -28,5 +28,4 @@ local function init()
 end
 
 
-return { init = init 
-       }
+return { init = init }
