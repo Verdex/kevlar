@@ -27,7 +27,9 @@ end
 -- dt is the delta time (in seconds?) of the last
 -- time that the function was called
 function love.update(dt)
-
+    for _, c in pairs( world:get_continuous() ) do
+        c.fn( dt ) 
+    end
 end
 
 -- this is the only function that the graphics functions
