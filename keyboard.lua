@@ -97,16 +97,16 @@ local function init_movement_mode( event, world, hero_id )
     end
     function m:keyrelease(key)
         if (key == 'h' or key == 'H') and self.h_id then
-            world:destroy_continuous( h_id )
+            world:destroy_continuous( self.h_id )
             self.h_id = false 
         elseif (key == 'k' or key == 'K') and self.k_id  then
-            world:destroy_continuous( k_id )
+            world:destroy_continuous( self.k_id )
             self.k_id = false 
         elseif (key == 'l' or key == 'L') and self.l_id then
-            world:destroy_continuous( l_id )
+            world:destroy_continuous( self.l_id )
             self.l_id = false 
         elseif (key == 'j' or key == 'J') and self.j_id then
-            world:destroy_continuous( j_id )
+            world:destroy_continuous( self.j_id )
             self.j_id = false 
         end
     end
