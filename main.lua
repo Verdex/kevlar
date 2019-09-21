@@ -35,8 +35,9 @@ end
 -- this is the only function that the graphics functions
 -- will work in
 function love.draw()
-    local h = world:get_mob( hero_id )
-    love.graphics.print( "@", h.x, h.y )
+    for _, m in pairs( world:get_mobs() ) do
+        love.graphics.print( m.symbol, m.x, m.y )
+    end
 end
 
 function love.mousepressed(x, y, button, istouch)
