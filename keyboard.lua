@@ -35,6 +35,9 @@ local function init()
         end
 
         if key == "escape" then
+            if self.mode then
+                self.mode:deactivate()
+            end
             self.mode = false
         elseif key == "lshift" then 
             self.left_shift = true
@@ -44,6 +47,7 @@ local function init()
             for _, v in ipairs( self.modes ) do
                 if v.mode == key then
                     self.mode = v.forwardee
+                    self.mode:activate()
                     break
                 end
             end
@@ -95,6 +99,7 @@ local function init_movement_mode( event, world, hero_id )
             end )
         end
     end
+
     function m:keyrelease(key)
         if (key == 'h' or key == 'H') and self.h_id then
             world:destroy_continuous( self.h_id )
@@ -108,6 +113,24 @@ local function init_movement_mode( event, world, hero_id )
         elseif (key == 'j' or key == 'J') and self.j_id then
             world:destroy_continuous( self.j_id )
             self.j_id = false 
+        end
+    end
+
+    function m:activate()
+    end
+
+    function m:deactivate()
+        if self.h_id then
+            world:destroy_continuous( self.h_id )
+        end
+        if self.k_id then
+            world:destroy_continuous( self.k_id )
+        end
+        if self.l_id then
+            world:destroy_continuous( self.l_id )
+        end
+        if self.j_id then
+            world:destroy_continuous( self.j_id )
         end
     end
 
