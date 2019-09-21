@@ -18,7 +18,7 @@ function love.load()
     
     hero_id = world:create_mob( { x = 10 ; y = 10 } )
     
-    local movement_mode = keyboard_mod.init_movement_mode( event, hero_id )
+    local movement_mode = keyboard_mod.init_movement_mode( event, world, hero_id )
 
     keyboard:set_mode( 'm', movement_mode )
 end

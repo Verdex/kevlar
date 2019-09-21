@@ -69,21 +69,46 @@ local function init()
     return k
 end
 
-local function init_movement_mode( event, hero_id )
-    local m = {}
+local function init_movement_mode( event, world, hero_id )
+    local m = { h_id = false
+              ; k_id = false
+              ; l_id = false
+              ; j_id = false
+              }
 
     function m:keypress(key)
         if key == 'h' then
-            event:trigger( "move", { who = hero_id; direction = "west" } )
+            self.h_id = world:create_continuous( function ( dt ) 
+                event:trigger( "move", { who = hero_id; direction = "west"; distance = 1 } )
+            end )
         elseif key == 'k' then
-            event:trigger( "move", { who = hero_id; direction = "north" } )
+            self.k_id = world:create_continuous( function ( dt ) 
+                event:trigger( "move", { who = hero_id; direction = "north"; distance = 1 } )
+            end )
         elseif key == 'l' then
-            event:trigger( "move", { who = hero_id; direction = "east" } )
+            self.l_id = world:create_continuous( function ( dt ) 
+                event:trigger( "move", { who = hero_id; direction = "east"; distance = 1 } )
+            end )
         elseif key == 'j' then
-            event:trigger( "move", { who = hero_id; direction = "south" } )
+            self.j_id = world:create_continuous( function ( dt ) 
+                event:trigger( "move", { who = hero_id; direction = "south"; distance = 1 } )
+            end )
         end
     end
     function m:keyrelease(key)
+        if (key == 'h' or key == 'H') and self.h_id then
+            world:destroy_continuous( h_id )
+            self.h_id = false 
+        elseif (key == 'k' or key == 'K') and self.k_id  then
+            world:destroy_continuous( k_id )
+            self.k_id = false 
+        elseif (key == 'l' or key == 'L') and self.l_id then
+            world:destroy_continuous( l_id )
+            self.l_id = false 
+        elseif (key == 'j' or key == 'J') and self.j_id then
+            world:destroy_continuous( j_id )
+            self.j_id = false 
+        end
     end
 
     return m
