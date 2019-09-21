@@ -79,19 +79,19 @@ local function init_movement_mode( event, world, hero_id )
     function m:keypress(key)
         if key == 'h' then
             self.h_id = world:create_continuous( function ( dt ) 
-                event:trigger( "move", { who = hero_id; direction = "west"; distance = 1 } )
+                event:trigger( "move", { who = hero_id; direction = "west"; time = dt } )
             end )
         elseif key == 'k' then
             self.k_id = world:create_continuous( function ( dt ) 
-                event:trigger( "move", { who = hero_id; direction = "north"; distance = 1 } )
+                event:trigger( "move", { who = hero_id; direction = "north"; time = dt } )
             end )
         elseif key == 'l' then
             self.l_id = world:create_continuous( function ( dt ) 
-                event:trigger( "move", { who = hero_id; direction = "east"; distance = 1 } )
+                event:trigger( "move", { who = hero_id; direction = "east"; time = dt } )
             end )
         elseif key == 'j' then
             self.j_id = world:create_continuous( function ( dt ) 
-                event:trigger( "move", { who = hero_id; direction = "south"; distance = 1 } )
+                event:trigger( "move", { who = hero_id; direction = "south"; time = dt } )
             end )
         end
     end
