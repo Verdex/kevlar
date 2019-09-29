@@ -1,4 +1,6 @@
 
+local util = require( 'util' )
+
 local function letter_collider()
     local f = love.graphics.newFont();
     local radius = f:getHeight() / 3
@@ -30,7 +32,11 @@ local function line_collider()
 end
 
 local function circle_circle_collision( a, b )
-        
+    local a_radius_squared = math.pow( a.r, 2 )
+    local b_radius_squared = math.pow( b.r, 2 )
+    local min_radius = math.min( a_radius_squared, b_radius_squared )
+
+    return util.distance_squared( a, b ) < min_radius 
 end
 
 local function line_line_collision( a, b )
